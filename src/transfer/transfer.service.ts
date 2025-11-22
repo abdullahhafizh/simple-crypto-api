@@ -71,6 +71,19 @@ export class TransferService {
           toUserId: toUserId,
         },
       });
+
+      await (tx as any).userTransferStats.upsert({
+        where: { userId: fromUserId },
+        create: {
+          userId: fromUserId,
+          totalOutbound: transferAmount,
+        },
+        update: {
+          totalOutbound: {
+            increment: transferAmount,
+          },
+        },
+      });
     });
   }
 }

@@ -7,9 +7,17 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { BalanceModule } from './balance/balance.module';
 import { TransferModule } from './transfer/transfer.module';
+import { ReportingModule } from './reporting/reporting.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, UserModule, BalanceModule, TransferModule],
+  imports: [
+    ConfigModule.forRoot(),
+    AuthModule,
+    UserModule,
+    BalanceModule,
+    TransferModule,
+    ReportingModule,
+  ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
