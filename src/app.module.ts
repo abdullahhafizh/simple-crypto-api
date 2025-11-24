@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { BalanceModule } from './balance/balance.module';
 import { TransferModule } from './transfer/transfer.module';
 import { ReportingModule } from './reporting/reporting.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ReportingModule } from './reporting/reporting.module';
     BalanceModule,
     TransferModule,
     ReportingModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
