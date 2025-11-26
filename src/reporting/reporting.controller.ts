@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RateLimitGuard } from '../rate-limit.guard';
@@ -14,12 +14,25 @@ export class ReportingController {
   constructor(private readonly reportingService: ReportingService) {}
 
   @Get('top_transactions_per_user')
-  async topTransactions(@Req() req: RequestWithUser) {
-    return this.reportingService.getTopTransactionsForUser(req.user.id);
+  async topTransactions(
+    @Req() req: RequestWithUser,
+    @Query('dateFrom') dateFrom?: string,
+    @Query('dateTo') dateTo?: string,
+  ) {
+    return this.reportingService.getTopTransactionsForUser(req.user.id, {
+      dateFrom,
+      dateTo,
+    });
   }
 
   @Get('top_users')
-  async topUsers() {
-    return this.reportingService.getTopUsers();
+  async topUsers(
+    @Query('dateFrom') dateFrom?: string,
+    @Query('dateTo') dateTo?: string,
+  ) {
+    return this.reportingService.getTopUsers({
+      dateFrom,
+      dateTo,
+    });
   }
 }
